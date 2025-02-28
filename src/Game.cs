@@ -22,19 +22,24 @@ class Game
 		Room pub = new Room("in the campus pub");
 		Room lab = new Room("in a computing lab");
 		Room office = new Room("in the computing admin office");
-		Room Basement = new Room("in the basement");
+		Room basement = new Room("in the basement");
+		Room rooftop = new Room("on the rooftop of the university");
 
 		// Initialise room exits
 		outside.AddExit("east", theatre);
 		outside.AddExit("south", lab);
 		outside.AddExit("west", pub);
-		outside.AddExit("down", Basement);
+		outside.AddExit("down", basement);
+		outside.AddExit("up", rooftop);
 
 		theatre.AddExit("west", outside);
 		pub.AddExit("east", outside);
 		lab.AddExit("north", outside);
 		lab.AddExit("east", office);
 		office.AddExit("west", lab);
+		
+		basement.AddExit("up", outside); 
+		rooftop.AddExit("down", outside);
 
 		// Start game outside
 		currentRoom = outside;
@@ -136,5 +141,3 @@ class Game
 		Console.WriteLine(currentRoom.GetLongDescription());
 	}
 }
-
-
