@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 class Game
 {
@@ -23,6 +24,7 @@ class Game
         Room basement = new Room("in the basement");
         Room rooftop = new Room("on the rooftop of the university");
 
+
         outside.AddExit("east", theatre);
         outside.AddExit("south", lab);
         outside.AddExit("west", pub);
@@ -40,6 +42,7 @@ class Game
 
        
         player.CurrentRoom = outside;
+
     }
 
     public void Play()
@@ -90,6 +93,11 @@ class Game
             case "look":
                 Look();
                 break;
+            
+            case "status":
+             player.Status();
+              break;
+
             case "quit":
                 wantToQuit = true;
                 break;
@@ -126,12 +134,24 @@ class Game
         }
 
         player.CurrentRoom = nextRoom;
+        player.Damage(50);
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
+
+        if (!player.IsAlive())
+    {
+        Console.WriteLine("You have died.");
+        Environment.Exit(0);
+    }
+
+        
     }
 
     private void Look()
     {
        
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
-    }
+    } 
 }
+
+
+
