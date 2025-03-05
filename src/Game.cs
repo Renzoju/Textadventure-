@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 class Game
@@ -143,7 +144,7 @@ class Game
         Environment.Exit(0);
     }
 
-        
+
     }
 
     private void Look()
@@ -152,6 +153,3 @@ class Game
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
     } 
 }
-
-
-
