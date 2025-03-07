@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 
 class Game
@@ -15,42 +14,45 @@ class Game
         CreateRooms();
     }
 
-    private void CreateRooms()
-    {
-        Room outside = new Room("outside the main entrance of the university");
-        Room theatre = new Room("in a lecture theatre");
-        Room pub = new Room("in the campus pub");
-        Room lab = new Room("in a computing lab");
-        Room office = new Room("in the computing admin office");
-        Room basement = new Room("in the basement");
-        Room rooftop = new Room("on the rooftop of the university");
+private void CreateRooms()
+{
+    Room outside = new Room("outside the main entrance of the university");
+    Room theatre = new Room("in a lecture theatre");
+    Room pub = new Room("in the campus pub");
+    Room lab = new Room("in a computing lab");
+    Room office = new Room("in the computing admin office");
+    Room basement = new Room("in the basement");
+    Room rooftop = new Room("on the rooftop of the university");
+
+    outside.AddExit("east", theatre);
+    outside.AddExit("south", lab);
+    outside.AddExit("west", pub);
+    outside.AddExit("down", basement);
+    outside.AddExit("up", rooftop);
+
+    theatre.AddExit("west", outside);
+    pub.AddExit("east", outside);
+    lab.AddExit("north", outside);
+    lab.AddExit("east", office);
+    office.AddExit("west", lab);
+    
+    basement.AddExit("up", outside);
+    rooftop.AddExit("down", outside);
 
 
-        outside.AddExit("east", theatre);
-        outside.AddExit("south", lab);
-        outside.AddExit("west", pub);
-        outside.AddExit("down", basement);
-        outside.AddExit("up", rooftop);
+    Item sword = new Item(5, "iron sword");
+    Item shield = new Item(7, "iron shield");
+    Item potion = new Item(1, " health potion");
 
-        theatre.AddExit("west", outside);
-        pub.AddExit("east", outside);
-        lab.AddExit("north", outside);
-        lab.AddExit("east", office);
-        office.AddExit("west", lab);
-        
-        basement.AddExit("up", outside);
-        rooftop.AddExit("down", outside);
+    player.CurrentRoom = outside;
+}
 
-       
-        player.CurrentRoom = outside;
-
-    }
 
     public void Play()
     {
         PrintWelcome();
 
-        bool finished = false;
+        bool finished = false;  
         while (!finished)
         {
             Command command = parser.GetCommand();
@@ -135,7 +137,7 @@ class Game
         }
 
         player.CurrentRoom = nextRoom;
-        player.Damage(50);
+        player.Damage(10);
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
 
         if (!player.IsAlive())
