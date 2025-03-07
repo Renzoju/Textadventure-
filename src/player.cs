@@ -3,50 +3,39 @@ using System;
 class Player
 {
     public Room CurrentRoom { get; set; }
-    
-    
-    
-    private int health;
+    public Inventory Inventory { get; private set; } 
 
-    public Player()
+    private int health = 100;
+
+    public int Health
+    {
+        get { return health; }
+        set 
+        { 
+            if (value < 0) health = 0;
+            else if (value > 100) health = 100;
+            else health = value;
+        }
+    }
+
+    public Player() 
     {
         CurrentRoom = null;
-        health = 100; 
+        Inventory = new Inventory(10);
     }
 
     public void Damage(int amount)
     {
-        health -= amount;
-        if (health < 0)
-        {
-            health = 0; 
-        }
+        Health -= amount;
     }
 
     public void Heal(int amount)
     {
-        health += amount;
-        if (health > 100)
-        {
-            health = 100; 
-        }
-    }
-
-    public int GetHealth()
-    {
-        return health;
+        Health += amount; 
     }
 
     public bool IsAlive()
-{
-    return health > 0;
-}
-
-      public void Status()
     {
-        Console.WriteLine($" health: {health}/100");
-    } 
+        return Health > 0;
+    }
 }
-
-
-

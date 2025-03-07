@@ -98,7 +98,7 @@ private void CreateRooms()
                 break;
             
             case "status":
-             player.Status();
+             Status();
               break;
 
             case "quit":
@@ -154,4 +154,11 @@ private void CreateRooms()
        
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
     } 
+
+
+   private void Status()
+{
+    Console.WriteLine("Your health is: " + player.Health);
+}
+
 }
