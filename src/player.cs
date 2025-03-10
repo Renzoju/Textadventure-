@@ -3,14 +3,14 @@ using System;
 class Player
 {
     public Room CurrentRoom { get; set; }
-    public Inventory Inventory { get; private set; } 
+    private Inventory backpack; 
 
     private int health = 100;
 
     public int Health
     {
         get { return health; }
-        set 
+        private set  
         { 
             if (value < 0) health = 0;
             else if (value > 100) health = 100;
@@ -21,12 +21,12 @@ class Player
     public Player() 
     {
         CurrentRoom = null;
-        Inventory = new Inventory(10);
+        backpack = new Inventory(25); 
     }
 
     public void Damage(int amount)
     {
-        Health -= amount;
+        Health -= amount; 
     }
 
     public void Heal(int amount)
@@ -39,3 +39,4 @@ class Player
         return Health > 0;
     }
 }
+
