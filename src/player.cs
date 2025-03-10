@@ -4,7 +4,6 @@ class Player
 {
     public Room CurrentRoom { get; set; }
     private Inventory backpack; 
-
     private int health = 100;
 
     public int Health
@@ -21,7 +20,7 @@ class Player
     public Player() 
     {
         CurrentRoom = null;
-        backpack = new Inventory(25); 
+        backpack = new Inventory(25); // 25kg max draaggewicht
     }
 
     public void Damage(int amount)
@@ -38,5 +37,25 @@ class Player
     {
         return Health > 0;
     }
-}
 
+    
+    public Inventory Backpack
+    {
+        get { return backpack; }
+    }
+
+    public bool TakeFromChest(string itemName)
+    {
+    
+
+        return false;
+    }
+
+    
+    public bool DropToChest(string itemName)
+    {
+     
+
+        return false;
+    }
+}
