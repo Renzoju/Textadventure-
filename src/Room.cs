@@ -9,12 +9,12 @@ class Room
 
     // Create a room described "description". Initially, it has no exits.
     // "description" is something like "in a kitchen" or "in a courtyard".
-    public Room(string desc)
-    {
-        description = desc;
-        exits = new Dictionary<string, Room>();
-        chest = new Inventory(999999); // Large inventory for the room
-    }
+public Room(string desc)
+{
+    description = desc;
+    exits = new Dictionary<string, Room>();
+    chest = new Inventory(500); 
+}
 
     // Define an exit for this room.
     public void AddExit(string direction, Room neighbor)

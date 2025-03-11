@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 
 class Inventory
 {
@@ -20,7 +20,6 @@ class Inventory
         }
         return false;
     }
-
 
     public Item Get(string itemName)
     {
@@ -46,5 +45,25 @@ class Inventory
     public int FreeWeight()
     {
         return maxWeight - TotalWeight();
+    }
+
+    public Dictionary<string, Item> GetItems()
+    {
+        return items;
+    }
+
+    public string Show()
+    {
+        if (items.Count == 0)
+        {
+            return "No items.";
+        }
+
+        string itemList = "";
+        foreach (var item in items)
+        {
+            itemList += $"\n- {item.Key} (Weight: {item.Value.Weight})";
+        }
+        return itemList;
     }
 }
