@@ -17,7 +17,7 @@ class CommandLibrary
 		validCommands.Add("status");
 	    validCommands.Add("take");
 		validCommands.Add("drop");
-	    validCommands.Add("show");
+	    
 	}
 
 	// Check whether a given string is a valid command word.

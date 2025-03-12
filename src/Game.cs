@@ -16,13 +16,18 @@ class Game
 
     private void CreateRooms()
     {
-        Room outside = new Room("outside the main entrance of the university");
-        Room theatre = new Room("in a lecture theatre");
-        Room pub = new Room("in the campus pub");
-        Room lab = new Room("in a computing lab");
-        Room office = new Room("in the computing admin office");
-        Room basement = new Room("in the basement");
-        Room rooftop = new Room("on the rooftop of the university");
+        Room outside = new Room("Your lost from school camp..... you are  in the Abandoned Churchyard, standing among broken gravestones. The wind is cold, and you feel something strange. A shadow moves quickly past you, and you are curious. You decide to follow it.");
+        Room theatre = new Room("You enter the Old Hallway, where dust fills the air, and the wooden floor creaks under your feet. The shadow moves ahead of you, just out of sight. You feel it there, but when you look, there’s nothing...");
+        Room pub = new Room("Next, you move into the Damaged Chapel, where the altar is dirty and candles flicker without a flame. The shadow is still ahead, moving quickly. You hear whispers, but the shadow keeps just out of your reach.. ");
+        Room lab = new Room("You follow the shadow into the Crumbling Sanctuary, where the walls are cracked, and only a little light comes through the broken windows. The shadow is growing longer, and you feel like you’re getting closer. But when you look, it’s always just ahead...");
+        Room office = new Room("You hurry into the Forgotten Crypt, where cold stone surrounds you. The air smells damp. The shadow is still there, always moving ahead, never waiting for you to catch up. You feel like you’re getting realy  closer, but you can’t see it...");
+        Room basement = new Room("You rush through the Dark Hallway, where the walls are cracked and shadows move quickly. You stop for a moment, but the shadow moves faster than you. It’s always just ahead, but you can’t catch it.");
+        Room rooftop = new Room("Suddenly, you find a stairway leading down. You decide to follow the shadow into the Basement, where it’s cold and dark. The air smells musty, and you hear nothing except the sound of your own footsteps. The shadow is still ahead, flickering in and out of view.");
+        Room room = new Room("You step into the Moldy Storage Room, where old boxes and broken furniture are piled everywhere. The shadow moves between the piles of junk. You reach out to grab it, but it slips through your fingers again.");
+        Room room1 = new Room("Finally, you enter the Hidden Cellar, where the walls are damp and cold. The shadow stops, and for the first time, you get close. But when you reach out to touch it, the shadow suddenly disappears into a crack in the wall. You look around and realize there’s a Locked Door ahead.");
+        Room room2 = new Room("You step into the Hidden Cellar, where the walls are damp and cold. The shadow stops, and for the first time, you get close. But when you reach out to touch it, the shadow suddenly disappears into a crack in the wall. You look around and realize there’s a Locked Door ahead.");
+        Room room3 = new Room("Finally, you reach the Locked Gate. The gate is old and rusty. It’s closed, and you can’t get through. But then you realize—you need a key. Without the key, you can’t follow the shadow anymore.");
+    
 
         outside.AddExit("east", theatre);
         outside.AddExit("south", lab);
@@ -106,9 +111,7 @@ class Game
             case "drop":
                 Drop(command);
                 break;
-            case "show":
-                Show();
-                break;
+
             case "quit":
                 wantToQuit = true;
                 break;
@@ -143,7 +146,8 @@ class Game
         }
 
         player.CurrentRoom = nextRoom;
-        player.Damage(10); // Verlies 10 gezondheidspunten bij elke beweging
+        player.Damage(10); 
+
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
 
         if (!player.IsAlive())
@@ -156,6 +160,10 @@ class Game
     private void Look()
     {
         Console.WriteLine(player.CurrentRoom.GetLongDescription());
+
+         Console.WriteLine("Items in the room:");
+        Console.WriteLine(player.CurrentRoom.Chest.Show());
+        Console.WriteLine();
     }
 
     private void Status()
@@ -202,10 +210,4 @@ class Game
         }
     }
 
-    private void Show()
-    {
-        Console.WriteLine("Items in the room:");
-        Console.WriteLine(player.CurrentRoom.Chest.Show());
-        Console.WriteLine();
-    }
 }
