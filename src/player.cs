@@ -22,6 +22,7 @@ class Player
         CurrentRoom = null;
         backpack = new Inventory(25);
     }
+    
 
     public void Damage(int amount)
     {

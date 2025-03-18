@@ -11,6 +11,11 @@ class Inventory
         this.items = new Dictionary<string, Item>();
     }
 
+    public int MaxWeight
+    {
+        get { return maxWeight; }
+    }
+
     public bool Put(string itemName, Item item)
     {
         if (TotalWeight() + item.Weight <= maxWeight)

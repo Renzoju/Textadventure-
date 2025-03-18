@@ -16,42 +16,61 @@ class Game
 
     private void CreateRooms()
     {
-        Room outside = new Room("Your lost from school camp..... you are  in the Abandoned Churchyard, standing among broken gravestones. The wind is cold, and you feel something strange. A shadow moves quickly past you, and you are curious. You decide to follow it.");
-        Room theatre = new Room("You enter the Old Hallway, where dust fills the air, and the wooden floor creaks under your feet. The shadow moves ahead of you, just out of sight. You feel it there, but when you look, there’s nothing...");
-        Room pub = new Room("Next, you move into the Damaged Chapel, where the altar is dirty and candles flicker without a flame. The shadow is still ahead, moving quickly. You hear whispers, but the shadow keeps just out of your reach.. ");
-        Room lab = new Room("You follow the shadow into the Crumbling Sanctuary, where the walls are cracked, and only a little light comes through the broken windows. The shadow is growing longer, and you feel like you’re getting closer. But when you look, it’s always just ahead...");
-        Room office = new Room("You hurry into the Forgotten Crypt, where cold stone surrounds you. The air smells damp. The shadow is still there, always moving ahead, never waiting for you to catch up. You feel like you’re getting realy  closer, but you can’t see it...");
-        Room basement = new Room("You rush through the Dark Hallway, where the walls are cracked and shadows move quickly. You stop for a moment, but the shadow moves faster than you. It’s always just ahead, but you can’t catch it.");
-        Room rooftop = new Room("Suddenly, you find a stairway leading down. You decide to follow the shadow into the Basement, where it’s cold and dark. The air smells musty, and you hear nothing except the sound of your own footsteps. The shadow is still ahead, flickering in and out of view.");
-        Room room = new Room("You step into the Moldy Storage Room, where old boxes and broken furniture are piled everywhere. The shadow moves between the piles of junk. You reach out to grab it, but it slips through your fingers again.");
-        Room room1 = new Room("Finally, you enter the Hidden Cellar, where the walls are damp and cold. The shadow stops, and for the first time, you get close. But when you reach out to touch it, the shadow suddenly disappears into a crack in the wall. You look around and realize there’s a Locked Door ahead.");
-        Room room2 = new Room("You step into the Hidden Cellar, where the walls are damp and cold. The shadow stops, and for the first time, you get close. But when you reach out to touch it, the shadow suddenly disappears into a crack in the wall. You look around and realize there’s a Locked Door ahead.");
-        Room room3 = new Room("Finally, you reach the Locked Gate. The gate is old and rusty. It’s closed, and you can’t get through. But then you realize—you need a key. Without the key, you can’t follow the shadow anymore.");
-    
+Room outside = new Room("lost from school camp... You stand in the Abandoned Churchyard, among broken gravestones. The cold wind howls, and a shadow moves quickly past you. Curious, you decide to follow it.");
+Room hallway = new Room("in the Old Hallway, where dust fills the air, and the wooden floor creaks under your feet. The shadow moves ahead of you, just out of sight...");
+Room chapel = new Room("in the Damaged Chapel, where the altar is dusty and candles flicker without a flame. Whispers echo through the air, but the shadow remains just out of reach...");
+Room sanctuary = new Room("in the Crumbling Sanctuary. The walls are cracked, and faint light seeps through broken windows. The shadow grows longer, yet stays ahead...");
+Room crypt = new Room("in the Forgotten Crypt, surrounded by cold stone. The damp air chills you. The shadow is close, but still you can't see it clearly...");
+Room darkHallway = new Room("in the Dark Hallway. The walls are cracked, and flickering shadows dance around you. The shadow moves fast, always just ahead...");
+Room basement = new Room("in the Basement. It’s cold and dark. The air smells musty, and the only sound is your own footsteps...");
+Room storageRoom = new Room("in the Moldy Storage Room, filled with old boxes and broken furniture. The shadow moves between the piles of junk. You reach out, but it slips away...");
+Room hiddenCellar = new Room("in the Hidden Cellar, where damp walls close in around you. The shadow finally stops, but as you reach out, it vanishes through a crack. Ahead, a Locked Door blocks your way.");
+Room lockedGate = new Room("at the Locked Gate. The gate is rusty and closed. You push, but it won't move. You need a key to continue...");
 
-        outside.AddExit("east", theatre);
-        outside.AddExit("south", lab);
-        outside.AddExit("west", pub);
-        outside.AddExit("down", basement);
-        outside.AddExit("up", rooftop);
+outside.AddExit("north", hallway);  
 
-        theatre.AddExit("west", outside);
-        pub.AddExit("east", outside);
-        lab.AddExit("north", outside);
-        lab.AddExit("east", office);
-        office.AddExit("west", lab);
+hallway.AddExit("south", outside);  
+hallway.AddExit("east", chapel);
+hallway.AddExit("west", sanctuary);
+hallway.AddExit("north", crypt);
+
+chapel.AddExit("west", hallway);
+chapel.AddExit("north", sanctuary);
+
+sanctuary.AddExit("south", chapel);
+sanctuary.AddExit("east", hallway);
+sanctuary.AddExit("north", crypt);
+
+crypt.AddExit("south", sanctuary);
+crypt.AddExit("east", darkHallway);
+
+darkHallway.AddExit("west", crypt);
+darkHallway.AddExit("down", basement);  
+
+basement.AddExit("up", darkHallway);  
+basement.AddExit("east", storageRoom);
+
+storageRoom.AddExit("west", basement);
+storageRoom.AddExit("south", hiddenCellar);
+
+hiddenCellar.AddExit("north", storageRoom);
+hiddenCellar.AddExit("east", lockedGate);
+
+lockedGate.AddExit("west", hiddenCellar);
+
         
-        basement.AddExit("up", outside);
-        rooftop.AddExit("down", outside);
-
-        // Voeg items toe aan de chest van een kamer
-        Item sword = new Item(5, "iron sword");
+        Item sword = new Item(25, "iron sword");
         Item shield = new Item(7, "iron shield");
         Item potion = new Item(1, "health potion");
+        Item key = new Item(1, "key");
 
         outside.Chest.Put("sword", sword);
         outside.Chest.Put("shield", shield);
-        outside.Chest.Put("potion", potion);
+        outside.Chest.Put(" healthpotion", potion);
+
+
+        storageRoom.Chest.Put("key", key);
+        
 
         player.CurrentRoom = outside;
     }
@@ -152,8 +171,8 @@ class Game
 
         if (!player.IsAlive())
         {
-            Console.WriteLine("You have died.");
-            Environment.Exit(0); // Beëindig het spel als de speler dood is
+            Console.WriteLine("You have died.  thanks for playing.");
+            Environment.Exit(0); 
         }
     }
 
@@ -166,13 +185,15 @@ class Game
         Console.WriteLine();
     }
 
-    private void Status()
-    {
-        Console.WriteLine("Your health is: " + player.Health);
-        Console.WriteLine();
-        Console.WriteLine("Your inventory:");
-        Console.WriteLine(player.ShowInventory());
-    }
+   private void Status()
+{
+    Console.WriteLine("Your health is: " + player.Health);
+    Console.WriteLine();
+    Console.WriteLine("Your inventory:");
+    Console.WriteLine(player.ShowInventory());
+    Console.WriteLine();
+    Console.WriteLine($"Backpack weight: {player.Backpack.TotalWeight()}/{player.Backpack.MaxWeight} KG");
+}
 
     private void Take(Command command)
     {
