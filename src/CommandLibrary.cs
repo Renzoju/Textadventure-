@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 class CommandLibrary
 {
@@ -17,6 +18,7 @@ class CommandLibrary
 		validCommands.Add("status");
 	    validCommands.Add("take");
 		validCommands.Add("drop");
+		validCommands.Add("use");
 	    
 	}
 

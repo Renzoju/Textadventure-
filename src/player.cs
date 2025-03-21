@@ -84,4 +84,32 @@ class Player
         }
         return false;
     }
+
+public bool Use(string itemName)
+{
+    Item item = Backpack.Get(itemName);
+    if (item == null)
+    {
+        return false; 
+    }
+
+    if (itemName == "medkit")
+    {
+        Heal(20); 
+        return true; 
+    }
+    else if (itemName == "key")
+    {
+        
+        return true;
+    }
+
+    return false; 
+}
+
+
+
+
+
+
 }

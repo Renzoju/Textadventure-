@@ -59,14 +59,14 @@ hiddenCellar.AddExit("east", lockedGate);
 lockedGate.AddExit("west", hiddenCellar);
 
         
-        Item sword = new Item(25, "iron sword");
+        Item sword = new Item(27, "iron sword");
         Item shield = new Item(7, "iron shield");
-        Item potion = new Item(1, "health potion");
+        Item medkit = new Item(1, "medkit");
         Item key = new Item(1, "key");
 
         outside.Chest.Put("sword", sword);
-        outside.Chest.Put("shield", shield);
-        outside.Chest.Put(" healthpotion", potion);
+        outside.Chest.Put("shield",shield);
+        outside.Chest.Put("medkit", medkit);
 
 
         storageRoom.Chest.Put("key", key);
@@ -130,6 +130,10 @@ lockedGate.AddExit("west", hiddenCellar);
             case "drop":
                 Drop(command);
                 break;
+                
+            case "use":
+                Use(command);
+                break;
 
             case "quit":
                 wantToQuit = true;
@@ -142,7 +146,7 @@ lockedGate.AddExit("west", hiddenCellar);
     private void PrintHelp()
     {
         Console.WriteLine("You are lost. You are alone.");
-        Console.WriteLine("You wander around at the university.");
+        Console.WriteLine("You wander around at the camp.");
         Console.WriteLine();
         parser.PrintValidCommands();
     }
@@ -160,7 +164,8 @@ lockedGate.AddExit("west", hiddenCellar);
 
         if (nextRoom == null)
         {
-            Console.WriteLine("There is no door to " + direction + "!");
+            Console.WriteLine("There is no door to " + direction +
+             "!");
             return;
         }
 
@@ -231,4 +236,40 @@ lockedGate.AddExit("west", hiddenCellar);
         }
     }
 
+
+
+    private void Use(Command command)
+{
+    if (!command.HasSecondWord())
+    {
+        Console.WriteLine("Use what?");
+        return;
+    }
+
+    string itemName = command.SecondWord;
+    if (player.Use(itemName))
+    {
+        if (itemName == "medkit")
+        {
+            Console.WriteLine("You used a medkit  and restored 20 health.");
+        }
+        else if (itemName == "key")
+        {
+            Console.WriteLine("You used the key. Maybe it can open something...");
+        }
+        else
+        {
+            Console.WriteLine($"You used the {itemName}.");
+        }
+    }
+    else
+    {
+        Console.WriteLine($"You can't use the {itemName} or you don't have it.");
+    }
 }
+
+}
+
+
+
+
